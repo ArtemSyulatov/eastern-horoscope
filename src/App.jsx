@@ -2,36 +2,18 @@ import './styles/App.css'
 import {Input} from "./components/ui/Input";
 import {Button} from "./components/ui/Button";
 import {useState} from "react";
-import {dates} from "./animals/animals.js";
-
+import {innerBeasts} from "./animals/animals.js";
+import {useAnimal} from "./hooks/useAnimal.js";
 
 function App() {
-    const [date, setDate] = useState('')
-    const [animal, setAnimal] = useState({
-        animal: '',
-        img: '',
-        compatibility: '',
-        sign: '',
-        luckNumbers: '',
-        luckColors: '',
-        years: [],
-        description: ''
-    })
-    const [year, setYear] = useState(null)
-    const [month, setMonth] = useState(null)
-    const [day, setDay] = useState(null)
+    const [date, setDate] = useState(null)
+    const [newDate,setNewDate] = useState(null)
     const [innerBeast, setInnerBeast] = useState('')
     const [lastNumOfYear, setLastNumOfYear] = useState(null)
     const [element, setElement] = useState('')
-    const handleClick = (e) => {
-        e.preventDefault()
-        dates.forEach((elem) => {
-            elem.years.forEach((years) => {
-                if (year === years) {
-                    setAnimal(elem)
-                }
-            })
-        })
+    const animal = useAnimal(newDate)
+    const handleClick = () => {
+        setNewDate(date)
         switch (lastNumOfYear) {
             case 0:
             case 1:
@@ -54,70 +36,30 @@ function App() {
                 setElement('Земля')
                 break;
         }
-        switch (month) {
-            case 1:
-                setInnerBeast('Ваше внутреннее животное: Бык')
-                break;
-            case 2:
-                setInnerBeast('Ваше внутреннее животное: Тигр')
-                break;
-            case 3:
-                setInnerBeast('Ваше внутреннее животное: Кролик')
-                break;
-            case 4:
-                setInnerBeast('Ваше внутреннее животное: Дракон')
-                break;
-            case 5:
-                setInnerBeast('Ваше внутреннее животное: Змея')
-                break;
-            case 6:
-                setInnerBeast('Ваше внутреннее животное: Лошадь')
-                break;
-            case 7:
-                setInnerBeast('Ваше внутреннее животное: Коза')
-                break;
-            case 8:
-                setInnerBeast('Ваше внутреннее животное: Обезьяна')
-                break;
-            case 9:
-                setInnerBeast('Ваше внутреннее животное: Петух')
-                break;
-            case 10:
-                setInnerBeast('Ваше внутреннее животное: Собака')
-                break;
-            case 11:
-                setInnerBeast('Ваше внутреннее животное: Свинья')
-                break;
-            case 12:
-                setInnerBeast('Ваше внутреннее животное: Крыса')
-                break;
-        }
+
+        setInnerBeast(innerBeasts[date.getMonth() + 1])
     }
     const handleChange = (e) => {
-        setYear(Number(e.target.value.slice(0, 4)))
-        setMonth(Number(e.target.value.slice(5, 7)))
-        setDay(Number(e.target.value.slice(8, 10)))
-        setLastNumOfYear(year % 10)
-        setDate(e.target.value)
+        const date = new Date(e.target.value)
+        setLastNumOfYear(date.getFullYear() % 10)
+        setDate(date)
     }
 
     return (
         <>
             <div className={'info'}><p className={'animal'}>{animal.animal}</p>
                 <div>{element}</div>
-                <img className={'animal_img'} src={animal.img}/>
+                <img alt='' className={'animal_img'} src={animal.img}/>
                 <p className={'compatibility'}>{animal.compatibility}</p>
                 <p className={'sign'}>{animal.sign}</p>
                 <p className={'luckNumbers'}>{animal.luckNumbers}</p>
                 <p className={'luckColors'}>{animal.luckColors}</p>
                 <p>{animal.description}</p>
-                <p>{innerBeast}</p>
+                {innerBeast && <p>Ваше внутреннее животное: {innerBeast}</p>}
             </div>
             <div className={'input'}>
-                <form>
                     <Input min="1900-00-00" max="2007-12-12" type={'date'} onChange={(e) => handleChange(e)}/>
-                    <Button onClick={(e) => handleClick(e)}>Submit</Button>
-                </form>
+                    <Button onClick={() => handleClick()}>Submit</Button>
             </div>
         </>
     )
