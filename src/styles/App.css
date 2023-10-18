@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Outfit:wght@400;500;600;700&family=Poppins:ital,wght@0,700;1,400&display=swap');
+
+
+body{
+  background-color: #f3fdfd;
+
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .logo {
@@ -39,4 +50,8 @@
 
 .read-the-docs {
   color: #888;
+}
+.info{
+  color: #088585;
+  line-height: 30px;
 }
