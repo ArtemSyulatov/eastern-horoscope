@@ -1,7 +1,7 @@
 import './styles/App.css'
 import {Input} from "./components/ui/Input";
 import {Button} from "./components/ui/Button";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {dates} from "./animals/animals.js";
 
 
@@ -9,6 +9,7 @@ function App() {
     const [date, setDate] = useState('')
     const [animal, setAnimal] = useState({
         animal: '',
+        img: '',
         compatibility: '',
         sign: '',
         luckNumbers: '',
@@ -104,7 +105,7 @@ function App() {
         <>
             <div className={'info'}><p className={'animal'}>{animal.animal}</p>
                 <div>{element}</div>
-                <img src={''}/>
+                <img className={'animal_img'} src={animal.img}/>
                 <p className={'compatibility'}>{animal.compatibility}</p>
                 <p className={'sign'}>{animal.sign}</p>
                 <p className={'luckNumbers'}>{animal.luckNumbers}</p>
