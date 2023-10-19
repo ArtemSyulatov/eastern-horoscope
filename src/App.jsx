@@ -12,6 +12,7 @@ function App() {
     const [lastNumOfYear, setLastNumOfYear] = useState(null)
     const [element, setElement] = useState('')
     const animal = useAnimal(newDate)
+
     const handleClick = () => {
         setNewDate(date)
         switch (lastNumOfYear) {
@@ -47,7 +48,10 @@ function App() {
 
     return (
         <>
-            <div className={'info'}><p className={'animal'}>{animal.animal}</p>
+            <div className={'info'}>
+                <h1>Eastern Horoscope</h1>
+
+                <p className={'animal'}>{animal.animal}</p>
                 <div>{element}</div>
                 <img alt='' className={'animal_img'} src={animal.img}/>
                 <p className={'compatibility'}>{animal.compatibility}</p>

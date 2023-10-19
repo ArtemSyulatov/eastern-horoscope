@@ -13,7 +13,7 @@ export const useAnimal = (date) => {
             description: ''
         }
         Object.entries(beasts).forEach(([key,value]) => {
-                if(date?.getFullYear() % 12 == key){
+                if(date?.getFullYear() % 12 === Number(key)){
                     animal1 = dates[value]
                 }
         })

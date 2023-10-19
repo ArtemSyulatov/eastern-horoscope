@@ -14,6 +14,7 @@ body{
   flex-wrap: wrap;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
+  flex-direction: column;
 }
 
 .logo {
@@ -58,4 +59,9 @@ body{
 .animal_img{
   max-width: 500px;
   max-height: 500px;
+}
+
+.input{
+  margin: 0 auto;
+  max-width: 300px;
 }
